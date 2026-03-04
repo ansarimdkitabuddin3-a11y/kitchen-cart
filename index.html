@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KITCHEN CARTTT</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f8f8f8;
+    color:#333;
+}
+
+/* HERO */
+.hero{
+    height:100vh;
+    background:url('https://i.ibb.co/bR8R0BvV/IMG-0895.jpg') center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#fff;
+    padding:20px;
+}
+
+.hero-content{
+    background:rgba(0,0,0,0.6);
+    padding:30px;
+    border-radius:10px;
+}
+
+.hero h1{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    margin-bottom:20px;
+}
+
+.btn{
+    padding:10px 20px;
+    background:#ff6600;
+    color:#fff;
+    border:none;
+    cursor:pointer;
+    border-radius:5px;
+    text-decoration:none;
+}
+
+/* PRODUCTS */
+.section{
+    padding:40px 20px;
+}
+
+.section h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.carousel{
+    display:flex;
+    overflow-x:auto;
+    gap:15px;
+    scroll-behavior:smooth;
+}
+
+.product{
+    min-width:250px;
+    background:#fff;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+.product img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.product h3{
+    margin:10px 0;
+}
+
+.product button{
+    margin-top:10px;
+    padding:8px;
+    background:#28a745;
+    color:#fff;
+    border:none;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+/* CART */
+.cart{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    max-width:500px;
+    margin:20px auto;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.cart input, .cart textarea{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+/* WHATSAPP */
+.whatsapp{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#25D366;
+    color:#fff;
+    padding:15px;
+    border-radius:50%;
+    text-decoration:none;
+    font-size:20px;
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>KITCHEN CARTTT</h1>
+        <p>Fresh Finds, Best Prices</p>
+        <button class="btn" onclick="scrollToProducts()">Shop Now</button>
+    </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section" id="products">
+    <h2>Our Products</h2>
+    <div class="carousel" id="carousel">
+        <div class="product">
+            <img src="https://i.ibb.co/HphLqVLh/Screenshot-2026-0302-104630.jpg">
+            <h3>Item 1</h3>
+            <p>₹200</p>
+            <button onclick="addToCart('Item 1',200)">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="https://i.ibb.co/GffWvjXp/Screenshot-2026-0302-104725.jpg">
+            <h3>Item 2</h3>
+            <p>₹300</p>
+            <button onclick="addToCart('Item 2',300)">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="https://i.ibb.co/6RxyCSr0/Screenshot-2026-0302-104821.jpg">
+            <h3>Item 3</h3>
+            <p>₹150</p>
+            <button onclick="addToCart('Item 3',150)">Add to Cart</button>
+        </div>
+
+        <div class="product">
+            <img src="https://i.ibb.co/PG9tSjFw/image.jpg">
+            <h3>Item 4</h3>
+            <p>₹400</p>
+            <button onclick="addToCart('Item 4',400)">Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<!-- CART -->
+<section class="section">
+    <h2>Place Order</h2>
+    <div class="cart">
+        <form onsubmit="submitOrder(event)">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="tel" id="phone" placeholder="Phone Number" required>
+            <textarea id="address" placeholder="Delivery Address" required></textarea>
+            <textarea id="items" placeholder="Selected Items" readonly></textarea>
+            <input type="text" id="total" placeholder="Total Amount" readonly>
+            <button class="btn" type="submit">Submit Order</button>
+        </form>
+    </div>
+</section>
+
+<!-- WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/9587542668" target="_blank">WA</a>
+
+<script>
+let cartItems = [];
+let total = 0;
+
+function scrollToProducts(){
+    document.getElementById('products').scrollIntoView({behavior:'smooth'});
+}
+
+function addToCart(name, price){
+    cartItems.push(name + " - ₹" + price);
+    total += price;
+    document.getElementById('items').value = cartItems.join("\n");
+    document.getElementById('total').value = "₹" + total;
+}
+
+function submitOrder(e){
+    e.preventDefault();
+    alert("Order Submitted!\nTotal: ₹" + total);
+    cartItems=[];
+    total=0;
+    document.getElementById('items').value="";
+    document.getElementById('total').value="";
+    e.target.reset();
+}
+</script>
+
+</body>
+  </html>
